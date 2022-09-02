@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0px;
+  padding: 0px;
+  background: rgb(40, 42, 53);
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+button {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: solid 2px black;
+  border-radius: 10px;
+  background: rgb(44, 226, 99);
+  padding: 1ch 2ch;
+}
+
+.footer {
+  background: rgb(0, 0, 0);
+  text-align: center;
+  font-family: "arial";
+  align-items: center;
+}
+
+.git {
+  align-items: center;
+  text-align: center;
+}
+
+tar -xf google-cloud-cli-400.0.0-linux-x86.tar.gz

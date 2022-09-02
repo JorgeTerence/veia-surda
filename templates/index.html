@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🙉</text></svg>">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>Teste de audição</title>
+  </head>
+  <body>
+    <h1>👂Teste de Audição👂</h1>
+
+    <div>
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" placeholder="Insira seu nome" />
+    </div>
+
+    <button>Enviar</button>
+
+    <div class="git">
+      <h2>git</h2>
+      github.com/JorgeTerence;
+      <br />github.com/FELPSTS; <br />github.com/gusata;
+    </div>
+
+    <footer>opa</footer>
+
+    <script>
+      const btn = document.querySelector("button");
+      const input = document.querySelector("input");
+
+      btn.addEventListener("click", () => {
+        const name = input.value;
+
+        fetch("{{ url_for('record') }}", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name }),
+        }).then(console.log);
+
+        setTimeout(() => window.location.href = `{{ url_for('results') }}/${name}`, 2000);
+      });
+    </script>
+  </body>
+</html>
