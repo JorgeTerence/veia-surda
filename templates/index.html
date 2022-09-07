@@ -1,48 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🙉</text></svg>">
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <title>Teste de audição</title>
-  </head>
-  <body>
-    <h1>👂Teste de Audição👂</h1>
+{% extends 'base.html' %}
 
-    <div>
-      <label for="username">Usuário:</label>
-      <input type="text" id="username" placeholder="Insira seu nome" />
-    </div>
+{% block title %}Teste de audição{% endblock %}
 
-    <button>Enviar</button>
+{% block content %}
+  <h1>Teste de Audição 🔈</h1>
 
-    <div class="git">
-      <h2>git</h2>
-      github.com/JorgeTerence;
-      <br />github.com/FELPSTS; <br />github.com/gusata;
-    </div>
+  <div>
+    <label for="username">Usuário:</label>
+    <input type="text" placeholder="Insira seu nome" />
+  </div>
 
-    <footer>opa</footer>
+  <button>Enviar</button>
+{% endblock %}
 
-    <script>
-      const btn = document.querySelector("button");
-      const input = document.querySelector("input");
+{% block script %}
+  <script>
+    const btn = document.querySelector("button");
+    const input = document.querySelector("input");
 
-      btn.addEventListener("click", () => {
-        const name = input.value;
+    btn.addEventListener("click", () => {
+      const name = input.value;
 
-        fetch("{{ url_for('record') }}", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name }),
-        }).then(console.log);
+      fetch(`/time/${name}`, { method: "POST"})
+        .then(console.log)
+        .catch(console.error);
 
-        setTimeout(() => window.location.href = `{{ url_for('results') }}/${name}`, 2000);
-      });
-    </script>
-  </body>
-</html>
+      setTimeout(() => (window.location.href = `/results/${name}`), 2000);
+    });
+  </script>
+{% endblock %}

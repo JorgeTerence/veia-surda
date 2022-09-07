@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from time import time
 
 app = Flask(__name__)
@@ -7,55 +7,51 @@ times = {}
 start_time = time()
 
 
-@app.route("/")  # Send time ✅
+@app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route("/time", methods=["POST"])  # Receive time ✅
-def record():
-    data = request.get_json()
-
-    name = data["name"]
+@app.route("/time/<name>", methods=["POST"])
+def record(name: str):
     user_time = time() - start_time
 
-    seconds = range(98, 128, 2)
-    frequencies = [4600, 5400, ] # TODO!!!!!
+    seconds = range(98, 125, 2)
+    frequencies = [ 4600, 5400, 6000, 6400, 7200, 8000, 9000, 10000, 11200, 12700, 14000, 15600, 17500, 19500, 20000 ]
 
     if user_time < 98:
         times[name] = 4200
+
+    if user_time > 124:
+        times[name] = 20000
 
     for t, freq in zip(seconds, frequencies):
         if 0 < t - user_time < 1:
             times[name] = freq
 
-        print(name, "->", user_time)
-    print(times)
-
     return str(times)
 
 
-@app.route("/admin")  # Start session page ✅
+@app.route("/admin")
 def admin():
     return render_template("admin.html")
 
 
-@app.route("/startup")  # Start session ✅
+@app.route("/startup")
 def startup():
     global start_time
 
     times.clear()
     start_time = time()
-    print(start_time)
 
     return str(start_time)
 
 
-@app.route("/results/<name>")  # Display results
-@app.route("/results")  # Display results
+@app.route("/results/<name>")
 def results(name: str = ""):
     average = sum(times.values()) / (len(times) or 1)
     return render_template("results.html", results=times, average=average, name=name)
+
 
 if __name__ == "__main__":
     app.run()

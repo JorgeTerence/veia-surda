@@ -1,45 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🙉</text></svg>">
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <title>Admin</title>
-  </head>
-  <body>
-    <h1>Admin 👔</h1>
+{% block title %}Admin{% endblock %}
 
-    <button id="send">Iniciar</button>
+{% block content %}
+  <h1>Admin 👔</h1>
+  <button>Iniciar</button>
+  <video src="/static/frequency.mp4" hidden></video>
+{% endblock %}
 
-    <video
-      src="{{ url_for('static', filename='frequency.mp4') }}"
-      hidden
-    ></video>
+{% block script %}
+  <script>
+    const btn = document.querySelector("button");
+    const video = document.querySelector("video");
 
-    <footer>
-      <ul>
-        <li>FELPSTS</li>
-        <li>gusata</li>
-        <li>JorgeTerence</li>
-      </ul>
-    </footer>
+    btn.addEventListener("click", () => {
+      fetch("/startup")
+        .then(console.log)
+        .catch(console.error);
 
-    <script>
-      const btn = document.querySelector("button");
-      const video = document.querySelector("video");
-
-      btn.addEventListener("click", () => {
-        fetch("{{ url_for('startup') }}")
-          .then((res) => res.text())
-          .then(console.log)
-          .catch(console.error);
-
-        video.play();
-      });
-    </script>
-  </body>
-</html>
+      video.play();
+    });
+  </script>
+{% endblock %}

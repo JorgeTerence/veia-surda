@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resultados</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🙉</text></svg>">
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-  </head>
-  <body>
-    <h1>Resultados 📈</h1>
+{% extends 'base.html' %}
 
-    {% if name %}
-      <p>Você escutou até {{ results[name] }} Hz</p>
-    {% endif %}
+{% block title %}Resultados{% endblock %}
 
-    <p>Média da turma: {{ average }}</p>
-
-    <table>
-      {% for name, time in results.items() %}
-        <tr>
-          <td>{{ name }}</td>
-          <td>{{ time }}</td>
-        </tr>
-      {% endfor %}
-    </table>
-  </body>
-</html>
+{% block content %}
+  <h1>Resultados 📈</h1>
+  
+  <p>Você escutou até {{ results[name] }} Hz</p>
+  
+  <p>Média da turma: {{ average }}</p>
+  
+  <table>
+    {% for name, time in results.items() %}
+      <tr>
+        <td>{{ name }}</td>
+        <td>{{ time }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

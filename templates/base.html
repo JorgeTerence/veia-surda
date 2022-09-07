@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+    <footer>
+      <p>Made by</p>
+      <ul>
+        <li><a href="https://github.com/FELPSTS">Felpas</a></li>
+        <li><a href="https://github.com/gusata">Gustavo Galeazzi</a></li>
+        <li><a href="https://github.com/JorgeTerence">Jorge Terence</a></li>
+        <li><abbr title="(・へ・)">Rodrigo Zanetti</abbr></li>
+      </ul>
+    </footer>
+    {% block script %}{% endblock %}
+  </body>
+</html>
